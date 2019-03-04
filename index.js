@@ -1,18 +1,26 @@
-const {Client} = require('pg');
+const express = require('express')
+const bodyParser = require('body-parser')
+const app = express()
+const db = require('./queries')
+const port = 3000
 
-const client = new Client({
-    user: "postgres",
-    password: "12345",
-    host: "localhost",
-    port: 5432,
-    database: "Clients"
-});
+app.use(bodyParser.json())
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+)
+//Rutas
+app.get('/', (request, response) => {
+  response.json({ info: 'Node.js, Express, and Postgres API by JoseMari' })
+})
 
+app.get('/users', db.getUsers)
+app.get('/users/:id', db.getUserById)
+app.post('/users', db.createUser)
+app.put('/users/:id', db.updateUser)
+app.delete('/users/:id', db.deleteUser)
 
-client.connect()
-.then(() => { console.log('Conectado correctamente'); })
-.then(() => client.query("INSERT INTO Clients values ($1, $2, $3, $4)", [100, 'Jhon', 'USA', '123456789']))
-.then(() => client.query("SELECT * from Clients"))
-.then(results => console.table(results.rows))
-.catch(e => console.log)
-.finally(() => client.end());
+app.listen(port, () => {
+  console.log(`App running on port ${port}.`)
+})

@@ -19,6 +19,9 @@
   },
   "homepage": "https://github.com/JMAndrades/TrabajoFinalAD#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "curl": "^0.1.4",
+    "express": "^4.16.4",
     "pg": "^7.8.1",
     "postgresql": "0.0.1"
   }
