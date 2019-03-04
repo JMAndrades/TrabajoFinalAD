@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "index.js"
+    "test": "index.js",
+    "fulltable": "node fullTable.js",
+    "asyncfulltable": "node asyncFullTable.js"
   },
   "repository": {
     "type": "git",
